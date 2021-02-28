@@ -22,7 +22,7 @@ pod 'HyCarousel'
 
 ## Author
 
-WiildchiilD, lyesd@360medlink.com
+WiildchiilD, lyesderouich@gmail.com
 
 ## License
 

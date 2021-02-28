@@ -8,7 +8,7 @@
 import SwiftUI
 
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
-struct HyCarousel<Data, ID, Content>: View where Data: RandomAccessCollection, ID: Hashable, Content: View , Data.Index : Hashable {
+public struct HyCarousel<Data, ID, Content>: View where Data: RandomAccessCollection, ID: Hashable, Content: View , Data.Index : Hashable {
     
     @EnvironmentObject var configurator : Configurator
     
@@ -90,7 +90,7 @@ struct HyCarousel<Data, ID, Content>: View where Data: RandomAccessCollection, I
     }
 }
 
-class Configurator: ObservableObject {
+public class Configurator: ObservableObject {
     @Published var selectedIndex = 0
     var backgroundColor : Color = .black
     var viewSize : CGSize = CGSize(width: 150, height: 200)
