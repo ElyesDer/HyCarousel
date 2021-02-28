@@ -28,7 +28,9 @@ A native, easy to use, easy to implement, highly customizable view, you can embe
   s.source           = { :git => 'https://github.com/WiildchiilD/HyCarousel.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
-  s.ios.deployment_target = '9.0'
+  s.ios.deployment_target = '14.0'
+  s.osx.deployment_target = "11"
+  s.watchos.deployment_target = "7.0"
 
   s.source_files = 'HyCarousel/Classes/**/*'
   
@@ -37,6 +39,7 @@ A native, easy to use, easy to implement, highly customizable view, you can embe
   # }
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit', 'MapKit'
+  s.frameworks = 'SwiftUI'
   # s.dependency 'AFNetworking', '~> 2.3'
+  s.swift_versions = '5.3'
 end
