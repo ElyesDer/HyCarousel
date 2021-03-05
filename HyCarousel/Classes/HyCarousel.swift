@@ -50,7 +50,7 @@ public struct HyCarousel<Data, ID, Content>: View where Data: RandomAccessCollec
             }
             .coordinateSpace(name: "scroll")
         }
-        .background(Color.red)
+        .edgesIgnoringSafeArea(.all)
     }
     
     @ViewBuilder
