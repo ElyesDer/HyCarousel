@@ -7,6 +7,14 @@
 
 import SwiftUI
 
+struct ViewOffsetKey: PreferenceKey {
+    typealias Value = CGFloat
+    static var defaultValue = CGFloat.zero
+    static func reduce(value: inout Value, nextValue: () -> Value) {
+        value += nextValue()
+    }
+}
+
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct HyCarousel<Data, ID, Content>: View where Data: RandomAccessCollection, ID: Hashable, Content: View , Data.Index : Hashable {
     
@@ -46,6 +54,13 @@ public struct HyCarousel<Data, ID, Content>: View where Data: RandomAccessCollec
                             reader.scrollTo(newIndex, anchor : .center)
                         })
                     })
+                    .background(GeometryReader {
+                        Color.clear.preference(key: ViewOffsetKey.self,
+                                               value: -$0.frame(in: .named("scroll")).origin.x)
+                    })
+                    .onPreferenceChange(ViewOffsetKey.self) {
+                        detector.send($0)
+                    }
                 }
             }
             .coordinateSpace(name: "scroll")
@@ -79,13 +94,9 @@ public struct HyCarousel<Data, ID, Content>: View where Data: RandomAccessCollec
     fileprivate func computeAngle(_ value: Double, index : Int) -> Double {
         if value > configurator.rotatedAngle.degrees {
             return configurator.rotatedAngle.degrees
-        }else if value < -configurator.rotatedAngle.degrees{
+        } else if value < -configurator.rotatedAngle.degrees{
             return -configurator.rotatedAngle.degrees
         }
-        if -6 ... 6 ~= value {
-            //            self.configurator.selectedIndex = index
-        }
-        
         return value
     }
 }
@@ -174,12 +185,5 @@ extension View {
         } else {
             self
         }
-    }
-}
-
-struct HyCarousel_Previews: PreviewProvider {
-    static var previews: some View {
-        //        HyCarousel()
-        EmptyView()
     }
 }
